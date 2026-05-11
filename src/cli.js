@@ -20,6 +20,10 @@ Example:
 `);
 }
 
+function isInvalidNumber(value) {
+  return Number.isNaN(value);
+}
+
 async function main() {
   if (process.argv.includes("--help") || process.argv.length <= 2) {
     showUsage();
@@ -33,8 +37,14 @@ async function main() {
   const width = Number(getArg("--width"));
   const height = Number(getArg("--height"));
   const feather = Number(getArg("--feather", "6"));
+  const hasMissingRequiredParam = !inputPath || !outputPath;
+  const hasInvalidNumericParam =
+    isInvalidNumber(x) ||
+    isInvalidNumber(y) ||
+    isInvalidNumber(width) ||
+    isInvalidNumber(height);
 
-  if (!inputPath || !outputPath || Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(width) || Number.isNaN(height)) {
+  if (hasMissingRequiredParam || hasInvalidNumericParam) {
     throw new Error("Missing required parameters or invalid parameters. Use --help for usage instructions.");
   }
 

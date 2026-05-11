@@ -72,11 +72,13 @@ async function removeWatermark(inputPath, outputPath, region, feather = 6) {
   const height = info.height;
   const channels = info.channels;
   const safeRegion = parseRegion(region, width, height);
+  const maxY = safeRegion.y + safeRegion.height;
+  const maxX = safeRegion.x + safeRegion.width;
   const source = new Uint8ClampedArray(data);
   const output = new Uint8ClampedArray(data);
 
-  for (let y = safeRegion.y; y < safeRegion.y + safeRegion.height; y += 1) {
-    for (let x = safeRegion.x; x < safeRegion.x + safeRegion.width; x += 1) {
+  for (let y = safeRegion.y; y < maxY; y += 1) {
+    for (let x = safeRegion.x; x < maxX; x += 1) {
       const [r, g, b, a] = sampleNeighborAverage(
         source,
         width,

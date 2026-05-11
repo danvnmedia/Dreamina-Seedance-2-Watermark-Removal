@@ -1,7 +1,7 @@
 {
   "name": "dreamina-seedance-2-watermark-removal",
   "version": "1.0.0",
-  "description": "Repo này tổng hợp thông tin về **Dreamina Seedance 2 Watermark Removal**.",
+  "description": "JavaScript CLI tool for removing watermarks from images by selected region.",
   "main": "src/cli.js",
   "scripts": {
     "start": "node src/cli.js",
