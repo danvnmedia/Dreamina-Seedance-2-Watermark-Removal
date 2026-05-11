@@ -1,0 +1,25 @@
+{
+  "name": "dreamina-seedance-2-watermark-removal",
+  "version": "1.0.0",
+  "description": "JavaScript CLI tool for removing watermarks from images by selected region.",
+  "main": "src/cli.js",
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danvnmedia/Dreamina-Seedance-2-Watermark-Removal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/danvnmedia/Dreamina-Seedance-2-Watermark-Removal/issues"
+  },
+  "homepage": "https://github.com/danvnmedia/Dreamina-Seedance-2-Watermark-Removal#readme",
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}

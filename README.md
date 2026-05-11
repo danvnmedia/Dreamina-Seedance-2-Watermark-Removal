@@ -15,11 +15,30 @@ Truy cập web tại: **https://nobadge-seven.vercel.app/**
 
 ## 🚀 Cách sử dụng
 
+### 1) Dùng website
+
 1. Mở trình duyệt.
 2. Truy cập: https://nobadge-seven.vercel.app/
 3. Sử dụng các chức năng có sẵn trên trang web.
 
+### 2) Dùng CLI JavaScript (xử lý ảnh local)
+
+Yêu cầu: Node.js 18+
+
+```bash
+npm install
+node src/cli.js --input ./input.png --output ./output.png --x 980 --y 700 --width 240 --height 100 --feather 8
+```
+
+Tham số:
+
+- `--input`: đường dẫn ảnh đầu vào
+- `--output`: đường dẫn ảnh đầu ra
+- `--x`, `--y`: tọa độ góc trên trái vùng watermark
+- `--width`, `--height`: kích thước vùng watermark
+- `--feather` (tùy chọn, mặc định `6`): bán kính lấy mẫu pixel xung quanh để nội suy
+
 ## 📝 Ghi chú
 
-- Nội dung repo hiện tập trung vào mô tả dự án và đường dẫn truy cập.
-- Nếu cần mở rộng thêm mã nguồn frontend/backend, có thể bổ sung ở các phiên bản tiếp theo.
+- CLI hiện dùng nội suy pixel vùng lân cận để lấp vùng watermark được chỉ định.
+- Kết quả phụ thuộc vào ảnh và vùng chọn, nên có thể cần tinh chỉnh tham số vùng + feather.
