@@ -20,7 +20,7 @@ Example:
 `);
 }
 
-function isInvalidNumber(value) {
+function isNaNValue(value) {
   return Number.isNaN(value);
 }
 
@@ -39,10 +39,10 @@ async function main() {
   const feather = Number(getArg("--feather", "6"));
   const hasMissingRequiredParam = !inputPath || !outputPath;
   const hasInvalidNumericParam =
-    isInvalidNumber(x) ||
-    isInvalidNumber(y) ||
-    isInvalidNumber(width) ||
-    isInvalidNumber(height);
+    isNaNValue(x) ||
+    isNaNValue(y) ||
+    isNaNValue(width) ||
+    isNaNValue(height);
 
   if (hasMissingRequiredParam || hasInvalidNumericParam) {
     throw new Error("Missing required parameters or invalid parameters. Use --help for usage instructions.");
