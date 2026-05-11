@@ -20,10 +20,6 @@ Example:
 `);
 }
 
-function isNaNValue(value) {
-  return Number.isNaN(value);
-}
-
 async function main() {
   if (process.argv.includes("--help") || process.argv.length <= 2) {
     showUsage();
@@ -37,15 +33,12 @@ async function main() {
   const width = Number(getArg("--width"));
   const height = Number(getArg("--height"));
   const feather = Number(getArg("--feather", "6"));
-  const hasMissingRequiredParam = !inputPath || !outputPath;
-  const hasInvalidNumericParam =
-    isNaNValue(x) ||
-    isNaNValue(y) ||
-    isNaNValue(width) ||
-    isNaNValue(height);
+  if (!inputPath || !outputPath) {
+    throw new Error("Missing required parameters: --input and --output are required. Use --help for usage instructions.");
+  }
 
-  if (hasMissingRequiredParam || hasInvalidNumericParam) {
-    throw new Error("Missing required parameters or invalid parameters. Use --help for usage instructions.");
+  if (Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(width) || Number.isNaN(height)) {
+    throw new Error("Invalid numeric parameters: --x, --y, --width, and --height must be valid numbers.");
   }
 
   if (width <= 0 || height <= 0 || feather < 1) {
