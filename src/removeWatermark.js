@@ -16,6 +16,18 @@ function getIndex(x, y, channels, width) {
   return (y * width + x) * channels;
 }
 
+/**
+ * Computes average RGBA values from neighboring pixels outside the watermark region.
+ * @param {Uint8ClampedArray} source Raw source pixel buffer.
+ * @param {number} width Image width.
+ * @param {number} height Image height.
+ * @param {number} channels Number of channels (after ensureAlpha, typically 4).
+ * @param {number} tx Target x coordinate to fill.
+ * @param {number} ty Target y coordinate to fill.
+ * @param {{x:number,y:number,width:number,height:number}} region Watermark region bounds.
+ * @param {number} feather Sampling radius around the target pixel.
+ * @returns {[number, number, number, number]} Averaged [r, g, b, a].
+ */
 function sampleNeighborAverage(source, width, height, channels, tx, ty, region, feather) {
   let sumR = 0;
   let sumG = 0;
@@ -62,6 +74,14 @@ function sampleNeighborAverage(source, width, height, channels, tx, ty, region, 
   ];
 }
 
+/**
+ * Removes watermark area by filling target region with averaged neighbor pixels.
+ * @param {string} inputPath Path to input image.
+ * @param {string} outputPath Path where output image is saved.
+ * @param {{x:number,y:number,width:number,height:number}} region Watermark rectangle.
+ * @param {number} [feather=6] Sampling radius used for interpolation.
+ * @returns {Promise<void>} Resolves when output file is written.
+ */
 async function removeWatermark(inputPath, outputPath, region, feather = 6) {
   const { data, info } = await sharp(inputPath)
     .ensureAlpha()

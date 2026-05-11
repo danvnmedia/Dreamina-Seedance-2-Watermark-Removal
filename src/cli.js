@@ -33,15 +33,16 @@ async function main() {
   const width = Number(getArg("--width"));
   const height = Number(getArg("--height"));
   const feather = Number(getArg("--feather", "6"));
+  const normalizedFeather = Math.floor(feather);
   if (!inputPath || !outputPath) {
     throw new Error("Missing required parameters: --input and --output are required. Use --help for usage instructions.");
   }
 
-  if (Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(width) || Number.isNaN(height)) {
-    throw new Error("Invalid numeric parameters: --x, --y, --width, and --height must be valid numbers.");
+  if (Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(width) || Number.isNaN(height) || Number.isNaN(feather)) {
+    throw new Error("Invalid numeric parameters: --x, --y, --width, --height, and --feather must be valid numbers.");
   }
 
-  if (width <= 0 || height <= 0 || feather < 1) {
+  if (width <= 0 || height <= 0 || normalizedFeather < 1) {
     throw new Error("Width and height must be greater than 0, and feather must be at least 1.");
   }
 
@@ -49,7 +50,7 @@ async function main() {
     path.resolve(process.cwd(), inputPath),
     path.resolve(process.cwd(), outputPath),
     { x, y, width, height },
-    Math.floor(feather)
+    normalizedFeather
   );
 
   console.log(`Successfully processed: ${outputPath}`);
