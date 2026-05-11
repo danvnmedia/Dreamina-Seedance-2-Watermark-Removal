@@ -35,11 +35,11 @@ async function main() {
   const feather = Number(getArg("--feather", "6"));
 
   if (!inputPath || !outputPath || Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(width) || Number.isNaN(height)) {
-    throw new Error("Thiếu tham số bắt buộc hoặc tham số không hợp lệ. Dùng --help để xem hướng dẫn.");
+    throw new Error("Missing required parameters or invalid parameters. Use --help for usage instructions.");
   }
 
   if (width <= 0 || height <= 0 || feather < 1) {
-    throw new Error("Giá trị width/height phải > 0 và feather phải >= 1.");
+    throw new Error("Width and height must be greater than 0, and feather must be at least 1.");
   }
 
   await removeWatermark(
@@ -49,7 +49,7 @@ async function main() {
     Math.floor(feather)
   );
 
-  console.log(`Đã xử lý xong: ${outputPath}`);
+  console.log(`Successfully processed: ${outputPath}`);
 }
 
 main().catch((error) => {
